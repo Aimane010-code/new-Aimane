@@ -1,51 +1,253 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aimane Zougagh — Portfolio & CV</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aimane Zougagh — Portfolio &amp; CV</title>
   <style>
     :root{
-      --bg:#0b0b0b;
-      --purple:#2b0b3a;
+      --bg:#0b0b0b; /* bijna zwart */
+      --purple:#2b0b3a; /* donker paars */
       --accent:#6f3fa0;
       --card:#111114;
       --text:#e8e6ef;
       --muted:#bdb6c9;
       --glass: rgba(255,255,255,0.03);
       --radius:14px;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#070707);color:var(--text);}
+    header{display:flex;align-items:center;gap:16px;padding:28px 32px;background:linear-gradient(90deg,var(--purple),rgba(0,0,0,0.2));box-shadow:0 4px 20px rgba(0,0,0,0.6);}
+    header .brand{font-weight:700;font-size:20px;letter-spacing:0.6px}
+    nav{margin-left:auto;display:flex;gap:12px}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px}
+    nav a.active, nav a:hover{background:var(--glass);color:var(--text)}
+
+    .container{max-width:980px;margin:34px auto;padding:28px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:var(--radius);box-shadow:0 6px 30px rgba(0,0,0,0.6);}
+
+    .hero{display:flex;gap:24px;align-items:center}
+    .photo{width:150px;height:150px;border-radius:16px;overflow:hidden;flex:0 0 150px;border:3px solid rgba(111,63,160,0.18)}
+    .photo img{width:100%;height:100%;object-fit:cover;display:block}
+    .intro h1{margin:0;font-size:26px}
+    .intro p{margin:6px 0;color:var(--muted)}
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:white;text-decoration:none;font-weight:600}
+
+    .split{display:grid;grid-template-columns:1fr 320px;gap:20px;margin-top:20px}
+    aside .block{margin-bottom:12px}
+    h3{margin:0 0 8px 0}
+    .meta{color:var(--muted);font-size:14px}
+
+    .section{margin-top:16px}
+    .job{padding:12px;border-radius:10px;background:rgba(255,255,255,0.01);margin-bottom:10px}
+    .job .period{color:var(--muted);font-size:13px}
+    ul{margin:8px 0 0 18px}
+
+    footer{padding:20px;text-align:center;color:var(--muted);font-size:13px}
+
+    /* responsive */
+    @media (max-width:900px){
+      .split{grid-template-columns:1fr;}
+      .photo{width:120px;height:120px}
     }
 
-    *{box-sizing:border-box;}
-    body{margin:0; background:linear-gradient(180deg,var(--bg),#070707); color:var(--text);}
-    a{color:var(--accent); text-decoration:none;}
-    header{display:flex; align-items:center; gap:16px; padding:20px 32px; background:var(--purple);}
-    header .brand{font-weight:700; font-size:22px;}
-    nav{margin-left:auto; display:flex; gap:12px;}
-    nav a{padding:8px 12px; border-radius:10px;}
-    nav a.active, nav a:hover{background:var(--glass);}
-    
-    .container{max-width:900px; margin:30px auto; padding:20px;}
-    .card{background:var(--card); padding:20px; border-radius:var(--radius); box-shadow:0 6px 20px rgba(0,0,0,0.5);}
-    
-    .hero{display:flex; gap:20px; align-items:center;}
-    .photo{width:140px; height:140px; border-radius:16px; overflow:hidden; border:3px solid rgba(111,63,160,0.18);}
-    .photo img{width:100%; height:100%; object-fit:cover;}
-    .intro h1{margin:0 0 6px 0;}
-    .intro p{margin:4px 0; color:var(--muted);}
-    .btn{display:inline-block; padding:10px 14px; border-radius:10px; background:var(--accent); color:white; font-weight:600; margin-top:10px;}
-    
-    .split{display:grid; grid-template-columns:1fr 300px; gap:20px; margin-top:20px;}
-    aside .block{margin-bottom:12px;}
-    h3{margin:0 0 8px 0;}
-    .meta{color:var(--muted); font-size:14px;}
-    
-    footer{text-align:center; padding:20px; color:var(--muted); font-size:13px;}
-    
-    @media(max-width:900px){.split{grid-template-columns:1fr;} .photo{width:120px;height:120px;}}
-    
-    .page{display:none;}
-    .page.active{display:block;}
+    /* small utility for hidden pages */
+    .page{display:none}
+    .page.active{display:block}
+
+    /* print-friendly */
+    @media print{body{background:white;color:black} header, nav, footer{display:none} .card{box-shadow:none}}
   </style>
 </head>
+<body>
+  <header>
+    <div class="brand">Aimane Zougagh</div>
+    <nav>
+      <a href="#" id="link-home" class="active">Voorblad</a>
+      <a href="#" id="link-cv">CV</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- HOME / VOORBLAD -->
+    <section id="home" class="page active">
+      <div class="card hero">
+        <div class="photo">
+          <!-- Zorg dat IMG_3846.JPG in dezelfde map staat als dit bestand -->
+          <img src="IMG_3846.JPG" alt="Foto van Aimane Zougagh">
+        </div>
+        <div class="intro">
+          <h1>Aimane Zougagh — 24</h1>
+          <p class="meta">Beginner ICT student (Allround IT Systems and Devices, MBO 3) — Gericht op leren en professionaliseren</p>
+          <p>Welbespraakte werkkracht die gedreven is om successen te boeken. Kan uitstekend samenwerken en heeft aan een half woord genoeg. Ervaren keuken professional, nu groeiend richting ICT.</p>
+          <div style="margin-top:12px">
+            <a class="btn" id="open-cv">Bekijk CV</a>
+            <a class="btn" style="background:transparent;border:1px solid rgba(111,63,160,0.18);margin-left:8px;color:var(--text);text-decoration:none" href="mailto:aimanszougagh31@gmail.com">E-mail</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="split">
+        <div>
+          <div class="card section">
+            <h3>Profielschets</h3>
+            <p class="meta">Welbespraakte werkkracht die gedreven is om successen te boeken. Kan uitstekend samenwerken en heeft aan een half woord genoeg. Ervaren keuken professional.</p>
+          </div>
+
+          <div class="card section">
+            <h3>Ervaring &amp; Doelen</h3>
+            <p>Nu bezig met MBO ICT (Allround IT Systems and Devices). Beschikbaar voor stages en deeltijdwerk. Gericht op praktische IT-vaardigheden en klantenservice.</p>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card">
+            <div class="block">
+              <h3>Contact</h3>
+              <div class="meta">E-mail: aimanszougagh31@gmail.com<br>Tel: 0685236902<br>Adres: Demeterpad 4, Nederland<br>Geboortedatum: 05-10-2001</div>
+            </div>
+            <div class="block">
+              <h3>Vaardigheden</h3>
+              <div class="meta">Horeca / Keuken (5 jaar), Stressbestendig, Representatief, Flexibel, Word / PowerPoint / Excel</div>
+            </div>
+            <div class="block">
+              <h3>Talen</h3>
+              <div class="meta">Nederlands (moedertaal), Engels A2</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- CV PAGE -->
+    <section id="cv" class="page">
+      <div class="card">
+        <h2 style="margin-top:0">CV — Aimane Zougagh</h2>
+        <p class="meta">Contact: aimanszougagh31@gmail.com • 0685236902 • Demeterpad 4 • </p>
+
+        <div class="section">
+          <h3>Profiel</h3>
+          <p>Welbespraakte werkkracht die gedreven is om successen te boeken. Kan uitstekend samenwerken en heeft aan een half woord genoeg. Ervaren keuken professional.</p>
+        </div>
+
+        <div class="section">
+          <h3>Werkervaring</h3>
+          <div class="job">
+            <strong>Aafje hoofdkantoor — Ondersteunende medewerker</strong>
+            <div class="period">2024 – 02/2024 | Rotterdam</div>
+            <ul>
+              <li>Klanten geholpen aan de balie.</li>
+              <li>Telefoongesprekken beantwoord en tickets verwerkt.</li>
+              <li>Laptop en telefoon klaargezet voor gebruik.</li>
+              <li>Ondersteuning bij Werkbeheer, locaties bezocht om klanten te helpen.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <strong>Horecamedewerker — PwC</strong>
+            <div class="period">01/2019 – 01/2020 | Rotterdam</div>
+            <ul>
+              <li>Klaarmaken en uitserveren van dranken en kleine bestellingen.</li>
+              <li>Bedienen van spoel- en afwasmachines volgens voorschriften.</li>
+              <li>Sorteren en opruimen van serviesgoed en bestek.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <strong>Bakker — Banketbakkerij</strong>
+            <div class="period">01/2018 – 08/2018 | Rotterdam</div>
+            <ul>
+              <li>Zorgen dat bestellingen worden geregistreerd en op tijd besteld.</li>
+              <li>Inkopen van ingrediënten en contact met leveranciers.</li>
+              <li>Maken van roosters voor personeelsbezetting.</li>
+            </ul>
+          </div>
+
+          <div class="job">
+            <strong>Bakker — Ammerlaan Retail</strong>
+            <div class="period">01/2017 – 08/2017 | Rotterdam</div>
+            <ul>
+              <li>Bereiden van deeg en bakken van brood.</li>
+              <li>Zorgen voor een schone en nette werkplek.</li>
+              <li>Openen en afsluiten van de bakkerij.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Opleidingen</h3>
+          <ul>
+            <li><strong>Allround IT Systems and Devices, MBO 3</strong> — Techniek College, Prins Alexanderlaan (08/2023 – 06/2026) — Status: Nog niet behaald</li>
+            <li><strong>Assistent Horeca &amp; Voeding, MBO 1</strong> — Albeda College, Rotterdam (09/2022 – 06/2023)</li>
+            <li><strong>Kok, MBO 2</strong> — Albeda College, Rotterdam (09/2021 – 06/2022)</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h3>Vaardigheden &amp; Competenties</h3>
+          <ul>
+            <li>Horeca / Keuken: ervaring met keukenapparatuur, 5 jaar horeca-ervaring, gastvrij</li>
+            <li>Algemeen: stressbestendig, representatief, flexibel inzetbaar</li>
+            <li>Computer: goede beheersing van Word, PowerPoint &amp; Excel</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h3>Talen</h3>
+          <ul>
+            <li>Nederlands — moedertaal</li>
+            <li>Engels — A2 (elementair)</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h3>Certificaten</h3>
+          <ul>
+            <li>HACCP certificaat</li>
+          </ul>
+        </div>
+
+        <div class="section">
+          <h3>Hobby's</h3>
+          <ul>
+            <li>Gamen</li>
+            <li>Sporten</li>
+            <li>Afspreken met vrienden</li>
+            <li>Knutselen aan computers</li>
+          </ul>
+        </div>
+
+        <div style="margin-top:16px">
+          <a class="btn" onclick="window.print()">Print / Download als PDF</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    &copy; " + new Date().getFullYear() + " Aimane Zougagh — Portfolio
+  </footer>
+
+  <script>
+    // Simple page switching
+    const linkHome = document.getElementById('link-home');
+    const linkCv = document.getElementById('link-cv');
+    const home = document.getElementById('home');
+    const cv = document.getElementById('cv');
+    const openCv = document.getElementById('open-cv');
+
+    function showPage(page){
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      page.classList.add('active');
+      document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+      if(page.id === 'home') linkHome.classList.add('active'); else linkCv.classList.add('active');
+    }
+
+    linkHome.addEventListener('click', e=>{e.preventDefault(); showPage(home)});
+    linkCv.addEventListener('click', e=>{e.preventDefault(); showPage(cv)});
+    openCv.addEventListener('click', ()=>{ showPage(cv); window.scrollTo({top:0,behavior:'smooth'}) });
+  </script>
+</body>
+</html>
